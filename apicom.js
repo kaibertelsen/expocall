@@ -40,7 +40,7 @@ async function Getlistairtable(baseId,tableId,body,id){
     throw new Error(`HTTP-feil! status: ${response.status} - ${response.statusText}`);
     }else {
     let data = await response.json();
-    apireturn({success: true, data: data, id: id});
+    preapireturn({success: true, data: data, id: id});
     }
 
 }
