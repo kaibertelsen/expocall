@@ -42,6 +42,13 @@ function listPreMessage(data) {
         // Oppdater meldingstekst
         rowElement.querySelector(".messagetextbody").textContent = message.message;
 
+        if(message?.standard){
+            rowElement.querySelector(".deletebuttonmessage").style.display = "none";
+        }else{
+            rowElement.querySelector(".deletebuttonmessage").style.display = "block";
+        }
+
+
         // Legg til klikk-hendelse
         rowElement.addEventListener("click", function () {
             markMessageButton(rowElement);
@@ -50,6 +57,14 @@ function listPreMessage(data) {
         // Legg til elementet i listen
         list.appendChild(rowElement);
     }
+
+    // Klon elementet
+    const inputtextfieldNode = elementLibrary.querySelector(".inputtextfield");
+    const inputtextfield = inputtextfieldNode.cloneNode(true);
+     // Legg til elementet i listen
+     list.appendChild(inputtextfield);
+    
+
 }
 
 function markMessageButton(selectbutton) {
