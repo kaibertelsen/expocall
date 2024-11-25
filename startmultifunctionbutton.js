@@ -1,12 +1,16 @@
 
 document.getElementById("multibuttonstart").addEventListener("click", startPremessageList);
+var preMessage = [];
+
 
 function startPremessageList(){
     if(preMessage.length>0){
         listPreMessage(preMessage);
+    }else{
+        getPremessage();
     }
     document.getElementById("startpremessagebuttontab").click();
-    getPremessage();
+    
 }
 
 function getPremessage() {
@@ -14,11 +18,10 @@ function getPremessage() {
     Getlistairtable("appYyqoMRDdL08VXJ", "tbljbPtkSRhx2U9IG", body, "respondPremessage");
 }
 
-var preMessage = [];
-
 function respondPremessage(data) {
     console.log(data);
-    preMessage = rawdatacleaner(data);  
+    preMessage = rawdatacleaner(data);
+    listPreMessage(preMessage);
 }
 
 function listPreMessage(data) {
