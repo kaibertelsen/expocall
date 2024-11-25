@@ -10,8 +10,8 @@ function loadScript(url) {
 
 // Liste over CDN-URL-er som skal lastes inn
 const cdnScripts = [
-    "https://kaibertelsen.github.io/innkjopsgruppen/expocall/startmultifunctionbutton.js",
-    "https://kaibertelsen.github.io/innkjopsgruppen/expocall/apicom.js"
+    "https://kaibertelsen.github.io/expocall/startmultifunctionbutton.js",
+    "https://kaibertelsen.github.io/expocall/apicom.js"
     
 ];
 
