@@ -29,7 +29,7 @@ function listPreMessage(data) {
     list.innerHTML = ""; // Fjern eksisterende elementer
 
     const elementLibrary = document.getElementById("elementholdermultibutton");
-    const nodeElement = elementLibrary.querySelector(".multibutton");
+    const nodeElement = elementLibrary.querySelector(".standardbuttonfield");
 
     for (let message of data) {
         // Klon elementet
