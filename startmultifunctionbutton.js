@@ -111,7 +111,7 @@ function listGroupMessage(data) {
         rowElement.dataset.airtable = group.airtable;
 
         // Oppdater meldingstekst
-        rowElement.querySelector(".messagetextbody").textContent = group.name;
+        rowElement.querySelector(".textgroupname").textContent = group.name;
 
         // Legg til klikk-hendelse
         rowElement.addEventListener("click", function () {
