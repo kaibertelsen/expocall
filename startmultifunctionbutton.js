@@ -10,7 +10,7 @@ function startPremessageList(){
         getPremessage();
     }
     document.getElementById("startpremessagebuttontab").click();
-    
+    getGroupPremessage();
 }
 
 function getPremessage() {
@@ -86,3 +86,51 @@ function filterPreMessage(data) {
     return array;
 }
 
+
+function getGroupPremessage() {
+    
+// Hente arrayen fra localStorage og tilordne til en let-variabel
+let group =  JSON.parse(localStorage.getItem("group"));
+// Her kan du bruke variabelen group som ønsket
+listGroupMessage(group);
+}
+
+function listGroupMessage(data) {
+    // Filter og list meldinger
+    data = filterGroupPreMessage(data);
+
+    const list = document.getElementById("groupmessagelist");
+    list.innerHTML = ""; // Fjern eksisterende elementer
+
+    const elementLibrary = document.getElementById("elementholdermultibutton");
+    const nodeElement = elementLibrary.querySelector(".groupbutton");
+
+    for (let group of data) {
+        // Klon elementet
+        const rowElement = nodeElement.cloneNode(true);
+        rowElement.dataset.airtable = group.airtable;
+
+        // Oppdater meldingstekst
+        rowElement.querySelector(".messagetextbody").textContent = group.name;
+
+        // Legg til klikk-hendelse
+        rowElement.addEventListener("click", function () {
+            markMessageButton(rowElement);
+        });
+
+        // Legg til elementet i listen
+        list.appendChild(rowElement);
+    }
+}
+
+function filterGroupPreMessage(data) {
+
+    // Filtrere meldinger basert på vilkårene
+    let array = [];
+    for (let group of data) {
+        if (group?.multibutton) {
+            array.push(group);
+        }
+    }
+    return array;
+}
