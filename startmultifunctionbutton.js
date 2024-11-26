@@ -158,17 +158,33 @@ function markMessageButton(selectbutton) {
 
 
 function markGroupButton(selectbutton) {
+    // Hent alle knapper i samme element som selectbutton
+    const parentElement = selectbutton.parentElement;
+    const buttons = parentElement.querySelectorAll(".multibutton");
 
     // Sjekk om knappen allerede har klassen 'selectbutton'
-        if (selectbutton.classList.contains("selectbutton")) {
+    if (selectbutton.classList.contains("selectbutton")) {
         selectbutton.classList.remove("selectbutton"); // Fjern klassen
+
+        // Hvis dataset.airtable er "Alle", fjern 'selectbutton' fra alle knapper
+        if (selectbutton.dataset.airtable === "Alle") {
+            buttons.forEach(button => button.classList.remove("selectbutton"));
+        }
+
         return false; // Returner false
-    }else{
+    } else {
         // Legg til valgt-klasse på klikket knapp
         selectbutton.classList.add("selectbutton");
-        return true
+
+        // Hvis dataset.airtable er "Alle", legg til 'selectbutton' på alle knapper
+        if (selectbutton.dataset.airtable === "Alle") {
+            buttons.forEach(button => button.classList.add("selectbutton"));
+        }
+
+        return true;
     }
 }
+
 
 
 function filterPreMessage(data) {
