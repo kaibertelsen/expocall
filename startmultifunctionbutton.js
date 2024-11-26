@@ -29,12 +29,12 @@ function listPreMessage(data) {
     // Filter og list meldinger
     data = filterPreMessage(data);
 
-        // Sorter meldingene etter nøkkelen 'date', nyeste dato først
-        data.sort((a, b) => {
-            const dateA = new Date(a.date); // Konverter dato til Date-objekt
-            const dateB = new Date(b.date); // Konverter dato til Date-objekt
-            return dateB - dateA; // Sorter i synkende rekkefølge
-        });
+    // Sorter meldingene etter nøkkelen 'date', nyeste dato først
+    data.sort((a, b) => {
+        const dateA = new Date(a.date); // Konverter dato til Date-objekt
+        const dateB = new Date(b.date); // Konverter dato til Date-objekt
+        return dateB - dateA; // Sorter i synkende rekkefølge
+    });
 
     const list = document.getElementById("premessagelist");
     list.innerHTML = ""; // Fjern eksisterende elementer
@@ -51,33 +51,33 @@ function listPreMessage(data) {
         rowElement.querySelector(".messagetextbody").textContent = message.message;
 
         let deletebutton = rowElement.querySelector(".deletebuttonmessage");
-        if(message?.standard){
+        if (message?.standard) {
             deletebutton.style.display = "none";
-        }else{
-            
+        } else {
             deletebutton.style.display = "block";
             deletebutton.addEventListener("click", function () {
-                const confirmation = confirm("Ønsker du å slette denne meldingen?");
-                if (confirmation) {
-                    // Hvis brukeren klikker "JA" (OK)
-                    deletemultiProMessage(deletebutton);
-                    console.log("Meldingen blir slettet.");
-                    // Her legger du inn logikk for å slette meldingen
-                } else {
-                    // Hvis brukeren klikker "NEI" (Avbryt)
-                    savemultiProMessage(deletebutton);
-                    console.log("Meldingen blir ikke slettet.");
-                }
+                // Bruk egendefinert bekreftelsesdialog
+                showCustomConfirm(
+                    "Ønsker du å slette denne meldingen?",
+                    () => {
+                        // Hvis brukeren klikker "JA"
+                        deletemultiProMessage(deletebutton);
+                        console.log("Meldingen blir slettet.");
+                    },
+                    () => {
+                        // Hvis brukeren klikker "NEI"
+                        console.log("Meldingen blir ikke slettet.");
+                    }
+                );
             });
         }
 
         // Legg til klikk-hendelse
         rowElement.addEventListener("click", function () {
-            
-            if(markMessageButton(rowElement)){
-                 document.getElementById("messageproareatextfield").value = message.message;
-            }else{
-                 document.getElementById("messageproareatextfield").value = ""
+            if (markMessageButton(rowElement)) {
+                document.getElementById("messageproareatextfield").value = message.message;
+            } else {
+                document.getElementById("messageproareatextfield").value = "";
             }
             controllSenderstatus();
         });
@@ -85,8 +85,8 @@ function listPreMessage(data) {
         // Legg til elementet i listen
         list.appendChild(rowElement);
     }
-
 }
+
 
 function deletemultiProMessage(button) {
     // Hent airtable-id fra knappen
@@ -127,11 +127,6 @@ preMessage.push(data.fields);
 listPreMessage(preMessage);
 
 }
-
-
-
-
-
 
 function markMessageButton(selectbutton) {
 
@@ -183,8 +178,6 @@ function markGroupButton(selectbutton) {
         return true;
     }
 }
-
-
 
 function filterPreMessage(data) {
     // Hent panelObject fra localStorage
