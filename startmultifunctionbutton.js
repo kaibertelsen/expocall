@@ -343,9 +343,9 @@ function presaveMultimessage(data) {
 }
 
 function rollbackMessageModule(){
-
-// Hent tekst fra textarea
-document.getElementById("messageproareatextfield").value = "";
-document.getElementById("footpanel").click();
-
+    // Hent tekst fra textarea
+    document.getElementById("messageproareatextfield").value = "";
+    document.getElementById("footpanel").click();
+    const button = document.querySelector(".multibuttondiv")
+    alertbuttonClick(button);
 }
