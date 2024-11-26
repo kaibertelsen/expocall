@@ -167,7 +167,7 @@ function controllSenderstatus(){
 
     if(textarea.value !="" && resivergroupbutton.dataset.airtable ){
         document.getElementById("sendmultimessage").classList.add("select");
-        return true;
+        return resivergroupbutton.dataset.airtable;
     }else{
         document.getElementById("sendmultimessage").classList.remove("select");
         return false;
@@ -177,6 +177,17 @@ function controllSenderstatus(){
 
 function sendMultiMessage(){
   if(controllSenderstatus()){
-    console.log("Send melding");
+    let callgroup = controllSenderstatus();
+    let text = document.getElementById("messageproareatextfield").value;
+
+    let data = {
+        callgroup:callgroup,
+        title:"Sone 1",
+        body:text,
+        includesender:true
+        }
+    callingRecivers(data)
   }
 }
+
+
