@@ -50,8 +50,12 @@ function listPreMessage(data) {
 
         // Legg til klikk-hendelse
         rowElement.addEventListener("click", function () {
-            markMessageButton(rowElement);
-            document.getElementById("messageproareatextfield").textContent = message.message;
+            
+            if(markMessageButton(rowElement)){
+                document.getElementById("messageproareatextfield").textContent = message.message;
+            }else{
+                 document.getElementById("messageproareatextfield").textContent = ""
+            }
             controllSenderstatus();
         });
 
@@ -62,17 +66,25 @@ function listPreMessage(data) {
 }
 
 function markMessageButton(selectbutton) {
-    // Finn alle multibutton-elementer i samme parent
+    // Sjekk om knappen allerede har klassen 'selectbutton'
+    if (selectbutton.classList.contains("selectbutton")) {
+        selectbutton.classList.remove("selectbutton"); // Fjern klassen
+        return false; // Returner false
+    }
+
+    // Hvis ikke, finn alle multibutton-elementer i samme parent
     let buttons = selectbutton.parentElement.querySelectorAll(".multibutton");
 
     // Fjern valgt-klasse fra alle
     for (let button of buttons) {
-        button.classList.remove("selectbutton"); // Rettet fra classlist til classList
+        button.classList.remove("selectbutton");
     }
 
     // Legg til valgt-klasse på klikket knapp
     selectbutton.classList.add("selectbutton");
+    return true;
 }
+
 
 function filterPreMessage(data) {
     // Hent panelObject fra localStorage
@@ -154,4 +166,5 @@ function controllSenderstatus(){
     if(textarea.value !="" && resivergroupbutton.dataset.airtable ){
         document.getElementById("sendmultimessage").classList.add("select");
     }
+    
 }
