@@ -185,13 +185,15 @@ function sendMultiMessage(){
     let body = text +"\nFra " +panelObject.usercurrent.name;
     let sonename = panelObject.sonecurrent.name;
     let respondcollection = document.getElementById("respondcollectionselector").value;
+    let respond = true;
+    if(respondcollection == ""){respond = false;}
    
     let data = {
         callgroup:[callgroup],
         title:sonename,
         body:body,
         includesender:true,
-        respond:true,
+        respond:respond,
         includesender:true,
         elementid:"multibuttonstart",
         respondcollection:respondcollection
