@@ -188,7 +188,8 @@ function sendMultiMessage(){
         title:"Sone 1",
         body:text,
         includesender:true,
-        respond:true
+        respond:true,
+        includesender:true
         }
     callingRecivers(data);
   }
