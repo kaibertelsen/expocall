@@ -111,7 +111,7 @@ function deletemultiProMessage(button) {
     DELETEairtable("appYyqoMRDdL08VXJ", "tbljbPtkSRhx2U9IG", airtable, "responddeletemultimessage");
 }
 function responddeletemultimessage(data){
-consol-log(data);
+console.log(data);
 }
 
 function savemultiProMessage(text){
