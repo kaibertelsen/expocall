@@ -82,24 +82,36 @@ function listPreMessage(data) {
 
 }
 
-function deletemultiProMessage(button){
+function deletemultiProMessage(button) {
+    // Hent airtable-id fra knappen
+    let airtable = button.parentElement.dataset.airtable;
 
-//fjerne den lokalt
-let airtable = button.parentElement.dataset.airtable;
+    // Fjern objektet fra preMessage-arrayen som har denne airtable-id
+    preMessage = preMessage.filter(message => message.airtable !== airtable);
 
-//fjerne den på server
+    // Logg for å bekrefte at elementet er fjernet fra preMessage
+    console.log("Oppdatert preMessage:", preMessage);
 
+    // Fjern elementet fra DOM-en
+    const parentElement = button.parentElement;
+    if (parentElement) {
+        parentElement.remove(); // Fjerner elementet fra DOM-en
+        console.log("Element fjernet fra DOM-en.");
+    } else {
+        console.error("parentElement ikke funnet.");
+    }
 
+    // Fjern objektet fra serveren
+    DELETEairtable("baseId", "tableId", airtable, "responddeletemultimessage");
 }
+
+
+
+
+
 
 function savemultiProMessage(){
 
-    //lagre den lokalt
-    let airtable = button.parentElement.dataset.airtable;
-    
-    //lagre den på på server
-    
-    
 }
 
 
