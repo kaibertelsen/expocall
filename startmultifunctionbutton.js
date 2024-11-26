@@ -309,6 +309,8 @@ function sendMultiMessage(){
     callingRecivers(data);
     presaveMultimessage(data);
     rollbackMessageModule();
+    const button = document.querySelector(".multibuttondiv")
+    alertbuttonClick(button);
   }
 }
 
@@ -346,6 +348,4 @@ function rollbackMessageModule(){
     // Hent tekst fra textarea
     document.getElementById("messageproareatextfield").value = "";
     document.getElementById("footpanel").click();
-    const button = document.querySelector(".multibuttondiv")
-    alertbuttonClick(button);
 }
