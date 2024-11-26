@@ -93,7 +93,7 @@ function deletemultiProMessage(button) {
     console.log("Oppdatert preMessage:", preMessage);
 
     // Fjern elementet fra DOM-en
-    const parentElement = button.parentElement;
+    const parentElement = button.parentElement.parentElement;
     if (parentElement) {
         parentElement.remove(); // Fjerner elementet fra DOM-en
         console.log("Element fjernet fra DOM-en.");
