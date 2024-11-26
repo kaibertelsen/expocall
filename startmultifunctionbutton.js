@@ -44,10 +44,23 @@ function listPreMessage(data) {
         // Oppdater meldingstekst
         rowElement.querySelector(".messagetextbody").textContent = message.message;
 
+        let deletebutton = rowElement.querySelector(".deletebuttonmessage");
         if(message?.standard){
-            rowElement.querySelector(".deletebuttonmessage").style.display = "none";
+            deletebutton.style.display = "none";
         }else{
-            rowElement.querySelector(".deletebuttonmessage").style.display = "block";
+            
+            deletebutton.style.display = "block";
+            deletebutton.addEventListener("click", function () {
+                const confirmation = confirm("Ønsker du å slette denne meldingen?");
+                if (confirmation) {
+                    // Hvis brukeren klikker "JA" (OK)
+                    console.log("Meldingen blir slettet.");
+                    // Her legger du inn logikk for å slette meldingen
+                } else {
+                    // Hvis brukeren klikker "NEI" (Avbryt)
+                    console.log("Meldingen blir ikke slettet.");
+                }
+            });
         }
 
         // Legg til klikk-hendelse
