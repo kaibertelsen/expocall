@@ -181,12 +181,14 @@ function sendMultiMessage(){
     let text = document.getElementById("messageproareatextfield").value;
 
     //data?.respond
-
-
+    let panelObject = JSON.parse(localStorage.getItem("panelObject"));
+    let body = text +"\nFra " +panelObject.usercurrent.name;
+    let sonename = panelObject.sonecurrent.name;
+   
     let data = {
         callgroup:[callgroup],
-        title:"Sone 1",
-        body:text,
+        title:sonename,
+        body:body,
         includesender:true,
         respond:true,
         includesender:true
