@@ -304,7 +304,7 @@ function presaveMultimessage(data) {
 function rollbackMessageModule(){
 
 // Hent tekst fra textarea
-document.getElementById("messageproareatextfield").value = "";
-document.getElementById("tabpanel").click();
+//document.getElementById("messageproareatextfield").value = "";
+//document.getElementById("tabpanel").click();
 
 }
