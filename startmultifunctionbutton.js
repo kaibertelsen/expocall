@@ -106,9 +106,20 @@ function deletemultiProMessage(button) {
 }
 
 
-function savemultiProMessage(){
+function savemultiProMessage(text){
+    let panelObject = JSON.parse(localStorage.getItem("panelObject"));
+    let userid = panelObject.usercurrent.airtable
 
+
+let body = {klient:[klientid],user:[userid],message:text};
+    POSTairtable("appYyqoMRDdL08VXJ", "tbljbPtkSRhx2U9IG",JSON.stringify(body),"respondsavemultimessage")
 }
+
+function respondsavemultimessage(data){
+//lagre lokalt
+preMessage.push(data.fields);
+}
+
 
 
 
@@ -246,5 +257,31 @@ function sendMultiMessage(){
         respondcollection:respondcollection
         }
     callingRecivers(data);
+    presaveMultimessage(data);
   }
+}
+
+
+
+function presaveMultimessage(data) {
+    // Hent valgt knapp og dens tekst
+    let rowElement = document.getElementById("premessagelist").querySelector(".selectbutton");
+    let buttontext = rowElement.querySelector(".messagetextbody").textContent;
+
+    // Hent tekst fra textarea
+    let textareatext = document.getElementById("messageproareatextfield").value;
+
+    // Sjekk om tekstene er forskjellige
+    if (buttontext !== textareatext) {
+        // Vis alert med valget JA/NEI
+        let confirmation = confirm("Ønsker du å lagre denne meldingen til fremtidig bruk?");
+        if (confirmation) {
+            // Hvis JA, kjør savemultiProMessage
+            savemultiProMessage(textareatext);
+        } else {
+            console.log("Brukeren valgte å ikke lagre meldingen.");
+        }
+    } else {
+        console.log("Tekstene er like. Ingen handling nødvendig.");
+    }
 }
