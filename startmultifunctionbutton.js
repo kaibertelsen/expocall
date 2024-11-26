@@ -54,10 +54,12 @@ function listPreMessage(data) {
                 const confirmation = confirm("Ønsker du å slette denne meldingen?");
                 if (confirmation) {
                     // Hvis brukeren klikker "JA" (OK)
+                    deletemultiProMessage(deletebutton);
                     console.log("Meldingen blir slettet.");
                     // Her legger du inn logikk for å slette meldingen
                 } else {
                     // Hvis brukeren klikker "NEI" (Avbryt)
+                    savemultiProMessage(deletebutton);
                     console.log("Meldingen blir ikke slettet.");
                 }
             });
@@ -79,6 +81,30 @@ function listPreMessage(data) {
     }
 
 }
+
+function deletemultiProMessage(button){
+
+//fjerne den lokalt
+let airtable = button.parentElement.dataset.airtable;
+
+//fjerne den på server
+
+
+}
+
+function savemultiProMessage(){
+
+    //lagre den lokalt
+    let airtable = button.parentElement.dataset.airtable;
+    
+    //lagre den på på server
+    
+    
+}
+
+
+
+
 
 function markMessageButton(selectbutton) {
     // Sjekk om knappen allerede har klassen 'selectbutton'
