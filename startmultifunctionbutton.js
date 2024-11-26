@@ -87,7 +87,6 @@ function listPreMessage(data) {
     }
 }
 
-
 function deletemultiProMessage(button) {
     // Hent airtable-id fra knappen
     let airtable = button.parentElement.dataset.airtable;
@@ -110,6 +109,7 @@ function deletemultiProMessage(button) {
     // Fjern objektet fra serveren
     DELETEairtable("appYyqoMRDdL08VXJ", "tbljbPtkSRhx2U9IG", airtable, "responddeletemultimessage");
 }
+
 function responddeletemultimessage(data){
 console.log(data);
 }
