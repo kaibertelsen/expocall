@@ -30,6 +30,13 @@ function listPreMessage(data) {
     // Filter og list meldinger
     data = filterPreMessage(data);
 
+        // Sorter meldingene etter nøkkelen 'date', nyeste dato først
+        data.sort((a, b) => {
+            const dateA = new Date(a.date); // Konverter dato til Date-objekt
+            const dateB = new Date(b.date); // Konverter dato til Date-objekt
+            return dateB - dateA; // Sorter i synkende rekkefølge
+        });
+
     const list = document.getElementById("premessagelist");
     list.innerHTML = ""; // Fjern eksisterende elementer
 
@@ -116,8 +123,10 @@ let body = {klient:[klientid],user:[userid],message:text};
 }
 
 function respondsavemultimessage(data){
-//lagre lokalt
+
 preMessage.push(data.fields);
+listPreMessage(preMessage);
+
 }
 
 
