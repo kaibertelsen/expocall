@@ -264,9 +264,14 @@ function sendMultiMessage(){
 
 
 function presaveMultimessage(data) {
-    // Hent valgt knapp og dens tekst
-    let rowElement = document.getElementById("premessagelist").querySelector(".selectbutton");
-    let buttontext = rowElement.querySelector(".messagetextbody").textContent;
+    // Hent valgt knapp, sjekk om den finnes
+    let rowElement = document.getElementById("premessagelist")?.querySelector(".selectbutton");
+    let buttontext = ""; // Default til tom streng hvis rowElement er null
+
+    if (rowElement) {
+        // Hvis rowElement finnes, hent tekstinnholdet
+        buttontext = rowElement.querySelector(".messagetextbody").textContent;
+    }
 
     // Hent tekst fra textarea
     let textareatext = document.getElementById("messageproareatextfield").value;
@@ -285,3 +290,4 @@ function presaveMultimessage(data) {
         console.log("Tekstene er like. Ingen handling nødvendig.");
     }
 }
+
