@@ -184,6 +184,7 @@ function sendMultiMessage(){
     let panelObject = JSON.parse(localStorage.getItem("panelObject"));
     let body = text +"\nFra " +panelObject.usercurrent.name;
     let sonename = panelObject.sonecurrent.name;
+    let respondcollection = document.getElementById("respondcollectionselector").value;
    
     let data = {
         callgroup:[callgroup],
@@ -191,11 +192,10 @@ function sendMultiMessage(){
         body:body,
         includesender:true,
         respond:true,
-        includesender:true
+        includesender:true,
+        elementid:"multibuttonstart",
+        respondcollection:respondcollection
         }
     callingRecivers(data);
   }
 }
-
-
-
