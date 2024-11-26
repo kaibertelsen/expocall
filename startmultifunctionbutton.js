@@ -110,7 +110,9 @@ function deletemultiProMessage(button) {
     // Fjern objektet fra serveren
     DELETEairtable("appYyqoMRDdL08VXJ", "tbljbPtkSRhx2U9IG", airtable, "responddeletemultimessage");
 }
-
+function responddeletemultimessage(data){
+consol-log(data);
+}
 
 function savemultiProMessage(text){
     let panelObject = JSON.parse(localStorage.getItem("panelObject"));
@@ -149,7 +151,6 @@ function markMessageButton(selectbutton) {
         return true;
 
 }
-
 
 function markGroupButton(selectbutton) {
     // Hent alle knapper i samme element som selectbutton
@@ -199,7 +200,6 @@ function filterPreMessage(data) {
 
     return array;
 }
-
 
 function getGroupPremessage() {
     
@@ -252,7 +252,6 @@ function filterGroupPreMessage(data) {
     return array;
 }
 
-
 function controllSenderstatus() {
     let textarea = document.getElementById("messageproareatextfield");
     let resivergroupbuttons = document.getElementById("groupmessagelist")?.querySelectorAll(".selectbutton");
@@ -271,8 +270,6 @@ function controllSenderstatus() {
         return false; // Ingen data å returnere
     }
 }
-
-
 
 function sendMultiMessage(){
   if(controllSenderstatus()){
@@ -305,8 +302,6 @@ function sendMultiMessage(){
     alertbuttonClick(button);
   }
 }
-
-
 
 function presaveMultimessage(data) {
     // Hent valgt knapp, sjekk om den finnes
@@ -347,8 +342,6 @@ function rollbackMessageModule(){
     document.getElementById("messageproareatextfield").value = "";
     document.getElementById("footpanel").click();
 }
-
-
 
 // Egendefinert bekreftelsesdialog
 function showCustomConfirm(message, onConfirm, onCancel) {
