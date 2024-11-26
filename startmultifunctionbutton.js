@@ -249,7 +249,7 @@ function controllSenderstatus() {
     let textarea = document.getElementById("messageproareatextfield");
     let resivergroupbuttons = document.getElementById("groupmessagelist")?.querySelectorAll(".selectbutton");
 
-    if (textarea.value !== "" && resivergroupbuttons) {
+    if (textarea.value !== "" && resivergroupbuttons.length !== 0) {
         document.getElementById("sendmultimessage").classList.add("select");
 
         // Lag en array med alle dataset.airtable-verdier
