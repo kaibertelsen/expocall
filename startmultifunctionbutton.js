@@ -1,5 +1,4 @@
 
-document.getElementById("multibuttonstart").addEventListener("click", startPremessageList);
 document.getElementById("sendmultimessage").addEventListener("click", sendMultiMessage);
 
 var preMessage = [];
