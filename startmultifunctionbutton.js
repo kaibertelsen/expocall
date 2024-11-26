@@ -102,12 +102,8 @@ function deletemultiProMessage(button) {
     }
 
     // Fjern objektet fra serveren
-    DELETEairtable("baseId", "tableId", airtable, "responddeletemultimessage");
+    DELETEairtable("appYyqoMRDdL08VXJ", "tbljbPtkSRhx2U9IG", airtable, "responddeletemultimessage");
 }
-
-
-
-
 
 
 function savemultiProMessage(){
