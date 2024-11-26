@@ -258,6 +258,7 @@ function sendMultiMessage(){
         }
     callingRecivers(data);
     presaveMultimessage(data);
+    rollbackMessageModule();
   }
 }
 
@@ -291,3 +292,10 @@ function presaveMultimessage(data) {
     }
 }
 
+function rollbackMessageModule(){
+
+// Hent tekst fra textarea
+document.getElementById("messageproareatextfield").value = "";
+document.getElementById("tabpanel").click();
+
+}
