@@ -1,5 +1,7 @@
 
 document.getElementById("multibuttonstart").addEventListener("click", startPremessageList);
+document.getElementById("sendmultimessage").addEventListener("click", sendMultiMessage);
+
 var preMessage = [];
 
 
@@ -165,8 +167,16 @@ function controllSenderstatus(){
 
     if(textarea.value !="" && resivergroupbutton.dataset.airtable ){
         document.getElementById("sendmultimessage").classList.add("select");
+        return true;
     }else{
         document.getElementById("sendmultimessage").classList.remove("select");
+        return false;
     }
-    
+}
+
+
+function sendMultiMessage(){
+  if(controllSenderstatus()){
+    console.log("Send melding");
+  }
 }
