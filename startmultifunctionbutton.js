@@ -331,14 +331,17 @@ function presaveMultimessage(data) {
 
     // Sjekk om tekstene er forskjellige
     if (buttontext !== textareatext) {
-        // Vis alert med valget JA/NEI
-        let confirmation = confirm("Ønsker du å lagre denne meldingen til fremtidig bruk?");
-        if (confirmation) {
-            // Hvis JA, kjør savemultiProMessage
-            savemultiProMessage(textareatext);
-        } else {
-            console.log("Brukeren valgte å ikke lagre meldingen.");
-        }
+        // Vis egendefinert bekreftelsesdialog
+        showCustomConfirm(
+            "Ønsker du å lagre denne meldingen til fremtidig bruk?",
+            () => {
+                // Hvis JA, kjør savemultiProMessage
+                savemultiProMessage(textareatext);
+            },
+            () => {
+                console.log("Brukeren valgte å ikke lagre meldingen.");
+            }
+        );
     } else {
         console.log("Tekstene er like. Ingen handling nødvendig.");
     }
@@ -348,4 +351,30 @@ function rollbackMessageModule(){
     // Hent tekst fra textarea
     document.getElementById("messageproareatextfield").value = "";
     document.getElementById("footpanel").click();
+}
+
+
+
+// Egendefinert bekreftelsesdialog
+function showCustomConfirm(message, onConfirm, onCancel) {
+    const confirmDialog = document.getElementById("customConfirmDialog");
+    const messageElement = confirmDialog.querySelector(".confirm-message");
+    const confirmButton = confirmDialog.querySelector(".confirm-yes");
+    const cancelButton = confirmDialog.querySelector(".confirm-no");
+
+    // Sett meldingen
+    messageElement.textContent = message;
+
+    // Legg til eventlisteners
+    confirmButton.onclick = () => {
+        confirmDialog.style.display = "none"; // Skjul dialogen
+        onConfirm(); // Kjør bekreftelsesfunksjon
+    };
+    cancelButton.onclick = () => {
+        confirmDialog.style.display = "none"; // Skjul dialogen
+        onCancel(); // Kjør avbrytfunksjon
+    };
+
+    // Vis dialogen
+    confirmDialog.style.display = "flex";
 }
