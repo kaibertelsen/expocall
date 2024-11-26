@@ -52,6 +52,7 @@ function listPreMessage(data) {
         rowElement.addEventListener("click", function () {
             markMessageButton(rowElement);
             document.getElementById("messageproareatextfield").textContent = message.message;
+            controllSenderstatus();
         });
 
         // Legg til elementet i listen
@@ -124,6 +125,8 @@ function listGroupMessage(data) {
         // Legg til klikk-hendelse
         rowElement.addEventListener("click", function () {
             markMessageButton(rowElement);
+            //markere sendeknapp
+            controllSenderstatus();
         });
 
         // Legg til elementet i listen
@@ -141,4 +144,14 @@ function filterGroupPreMessage(data) {
         }
     }
     return array;
+}
+
+
+function controllSenderstatus(){
+    let textarea = document.getElementById("messageproareatextfield");
+    let resivergroupbutton = document.getElementById("groupmessagelist").querySelector(".selectbutton");
+
+    if(textarea.value !="" && resivergroupbutton.dataset.airtable ){
+        document.getElementById("sendmultimessage").classList.add("select");
+    }
 }
