@@ -165,6 +165,8 @@ function controllSenderstatus(){
 
     if(textarea.value !="" && resivergroupbutton.dataset.airtable ){
         document.getElementById("sendmultimessage").classList.add("select");
+    }else{
+        document.getElementById("sendmultimessage").classList.remove("select");
     }
     
 }
