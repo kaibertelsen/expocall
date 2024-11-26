@@ -301,7 +301,6 @@ function sendMultiMessage(){
         }
     callingRecivers(data);
     presaveMultimessage(data);
-    rollbackMessageModule();
     const button = document.querySelector(".multibuttondiv")
     alertbuttonClick(button);
   }
@@ -330,12 +329,15 @@ function presaveMultimessage(data) {
             () => {
                 // Hvis JA, kjør savemultiProMessage
                 savemultiProMessage(textareatext);
+                rollbackMessageModule();
             },
             () => {
                 console.log("Brukeren valgte å ikke lagre meldingen.");
+                rollbackMessageModule();
             }
         );
     } else {
+        rollbackMessageModule();
         console.log("Tekstene er like. Ingen handling nødvendig.");
     }
 }
