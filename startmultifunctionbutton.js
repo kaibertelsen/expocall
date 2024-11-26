@@ -76,9 +76,9 @@ function listPreMessage(data) {
         rowElement.addEventListener("click", function () {
             
             if(markMessageButton(rowElement)){
-                document.getElementById("messageproareatextfield").textContent = message.message;
+                 document.getElementById("messageproareatextfield").value = message.message;
             }else{
-                 document.getElementById("messageproareatextfield").textContent = ""
+                 document.getElementById("messageproareatextfield").value = ""
             }
             controllSenderstatus();
         });
@@ -304,7 +304,7 @@ function presaveMultimessage(data) {
 function rollbackMessageModule(){
 
 // Hent tekst fra textarea
-//document.getElementById("messageproareatextfield").value = "";
-//document.getElementById("tabpanel").click();
+document.getElementById("messageproareatextfield").value = "";
+document.getElementById("tabpanel").click();
 
 }
