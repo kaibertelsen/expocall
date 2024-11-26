@@ -48,22 +48,15 @@ function listPreMessage(data) {
             rowElement.querySelector(".deletebuttonmessage").style.display = "block";
         }
 
-
         // Legg til klikk-hendelse
         rowElement.addEventListener("click", function () {
             markMessageButton(rowElement);
+            document.getElementById("messageproareatextfield").textContent = message.message;
         });
 
         // Legg til elementet i listen
         list.appendChild(rowElement);
     }
-
-    // Klon elementet
-    const inputtextfieldNode = elementLibrary.querySelector(".inputtextfield");
-    const inputtextfield = inputtextfieldNode.cloneNode(true);
-     // Legg til elementet i listen
-     list.appendChild(inputtextfield);
-    
 
 }
 
