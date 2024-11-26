@@ -136,23 +136,6 @@ listPreMessage(preMessage);
 
 function markMessageButton(selectbutton) {
 
-    if(selectbutton.dataset.airtable == "Alle"){
-        // Hvis ikke, finn alle multibutton-elementer i samme parent
-        let buttons = selectbutton.parentElement.querySelectorAll(".multibutton");
-
-        if (selectbutton.classList.contains("selectbutton")) {
-
-        // Fjern valgt-klasse fra alle
-            for (let button of buttons) {
-                button.classList.remove("selectbutton");
-            }
-        }else{
-            for (let button of buttons) {
-                button.classList.add("selectbutton");
-            }
-        }
-
-    }else{
         // Sjekk om knappen allerede har klassen 'selectbutton'
         if (selectbutton.classList.contains("selectbutton")) {
             selectbutton.classList.remove("selectbutton"); // Fjern klassen
@@ -171,8 +154,20 @@ function markMessageButton(selectbutton) {
         selectbutton.classList.add("selectbutton");
         return true;
 
-    }
+}
 
+
+function markGroupButton(selectbutton) {
+
+    // Sjekk om knappen allerede har klassen 'selectbutton'
+        if (selectbutton.classList.contains("selectbutton")) {
+        selectbutton.classList.remove("selectbutton"); // Fjern klassen
+        return false; // Returner false
+    }else{
+        // Legg til valgt-klasse på klikket knapp
+        selectbutton.classList.add("selectbutton");
+        return true
+    }
 }
 
 
@@ -227,7 +222,7 @@ function listGroupMessage(data) {
 
         // Legg til klikk-hendelse
         rowElement.addEventListener("click", function () {
-            markMessageButton(rowElement);
+            markGroupButton(rowElement);
             //markere sendeknapp
             controllSenderstatus();
         });
@@ -250,33 +245,32 @@ function filterGroupPreMessage(data) {
 }
 
 
-function controllSenderstatus(){
+function controllSenderstatus() {
     let textarea = document.getElementById("messageproareatextfield");
-    let resivergroupbutton = document.getElementById("groupmessagelist").querySelector(".selectbutton");
+    let resivergroupbuttons = document.getElementById("groupmessagelist")?.querySelectorAll(".selectbutton");
 
-    if(textarea.value !="" && resivergroupbutton){
+    if (textarea.value !== "" && resivergroupbuttons) {
         document.getElementById("sendmultimessage").classList.add("select");
-        return resivergroupbutton.dataset.airtable;
-    }else{
+
+        // Lag en array med alle dataset.airtable-verdier
+        let airtableValues = Array.from(resivergroupbuttons)
+            .map(button => button.dataset.airtable) // Hent dataset.airtable
+            .filter(value => value !== "Alle"); // Fjern "Alle" fra arrayen
+
+        return airtableValues; // Returner arrayen
+    } else {
         document.getElementById("sendmultimessage").classList.remove("select");
-        return false;
+        return false; // Ingen data å returnere
     }
 }
+
 
 
 function sendMultiMessage(){
   if(controllSenderstatus()){
 
     let callgroup = controllSenderstatus();
-    if(controllSenderstatus()=="Alle"){
-        //alle gruppene
-        callgroup = filterGroupPreMessage(data)
-    }else{
-        callgroup =  [callgroup];
-    }
 
-
-    
     let text = document.getElementById("messageproareatextfield").value;
 
     //data?.respond
