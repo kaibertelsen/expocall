@@ -1,8 +1,8 @@
 
 document.getElementById("sendmultimessage").addEventListener("click", sendMultiMessage);
+document.getElementById("backfrommultimessage").addEventListener("click", rollbackMessageModule);
 
 var preMessage = [];
-
 
 function startPremessageList(){
     if(preMessage.length>0){
