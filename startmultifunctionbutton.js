@@ -180,14 +180,19 @@ function sendMultiMessage(){
     let callgroup = controllSenderstatus();
     let text = document.getElementById("messageproareatextfield").value;
 
+    //data?.respond
+
+
     let data = {
         callgroup:[callgroup],
         title:"Sone 1",
         body:text,
-        includesender:true
+        includesender:true,
+        respond:true
         }
-    callingRecivers(data)
+    callingRecivers(data);
   }
 }
+
 
 
