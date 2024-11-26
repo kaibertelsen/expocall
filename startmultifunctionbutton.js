@@ -188,6 +188,7 @@ listGroupMessage(group);
 function listGroupMessage(data) {
     // Filter og list meldinger
     data = filterGroupPreMessage(data);
+    data.push({name:"Alle",airtable:""});
 
     const list = document.getElementById("groupmessagelist");
     list.innerHTML = ""; // Fjern eksisterende elementer
@@ -244,7 +245,17 @@ function controllSenderstatus(){
 
 function sendMultiMessage(){
   if(controllSenderstatus()){
+
     let callgroup = controllSenderstatus();
+    if(controllSenderstatus()==""){
+        //alle gruppene
+        callgroup = filterGroupPreMessage(data)
+    }else{
+        callgroup =  [callgroup];
+    }
+
+
+    
     let text = document.getElementById("messageproareatextfield").value;
 
     //data?.respond
@@ -256,7 +267,7 @@ function sendMultiMessage(){
     if(respondcollection == ""){respond = false;}
    
     let data = {
-        callgroup:[callgroup],
+        callgroup:callgroup,
         title:sonename,
         body:body,
         includesender:true,
