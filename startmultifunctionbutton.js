@@ -135,23 +135,44 @@ listPreMessage(preMessage);
 
 
 function markMessageButton(selectbutton) {
-    // Sjekk om knappen allerede har klassen 'selectbutton'
-    if (selectbutton.classList.contains("selectbutton")) {
-        selectbutton.classList.remove("selectbutton"); // Fjern klassen
-        return false; // Returner false
+
+    if(selectbutton.dataset.airtable == "Alle"){
+        // Hvis ikke, finn alle multibutton-elementer i samme parent
+        let buttons = selectbutton.parentElement.querySelectorAll(".multibutton");
+
+        if (selectbutton.classList.contains("selectbutton")) {
+
+        // Fjern valgt-klasse fra alle
+            for (let button of buttons) {
+                button.classList.remove("selectbutton");
+            }
+        }else{
+            for (let button of buttons) {
+                button.classList.add("selectbutton");
+            }
+        }
+
+    }else{
+        // Sjekk om knappen allerede har klassen 'selectbutton'
+        if (selectbutton.classList.contains("selectbutton")) {
+            selectbutton.classList.remove("selectbutton"); // Fjern klassen
+            return false; // Returner false
+        }
+
+        // Hvis ikke, finn alle multibutton-elementer i samme parent
+        let buttons = selectbutton.parentElement.querySelectorAll(".multibutton");
+
+        // Fjern valgt-klasse fra alle
+        for (let button of buttons) {
+            button.classList.remove("selectbutton");
+        }
+
+        // Legg til valgt-klasse på klikket knapp
+        selectbutton.classList.add("selectbutton");
+        return true;
+
     }
 
-    // Hvis ikke, finn alle multibutton-elementer i samme parent
-    let buttons = selectbutton.parentElement.querySelectorAll(".multibutton");
-
-    // Fjern valgt-klasse fra alle
-    for (let button of buttons) {
-        button.classList.remove("selectbutton");
-    }
-
-    // Legg til valgt-klasse på klikket knapp
-    selectbutton.classList.add("selectbutton");
-    return true;
 }
 
 
@@ -188,7 +209,7 @@ listGroupMessage(group);
 function listGroupMessage(data) {
     // Filter og list meldinger
     data = filterGroupPreMessage(data);
-    data.push({name:"Alle",airtable:""});
+    data.push({name:"Alle",airtable:"Alle"});
 
     const list = document.getElementById("groupmessagelist");
     list.innerHTML = ""; // Fjern eksisterende elementer
@@ -247,7 +268,7 @@ function sendMultiMessage(){
   if(controllSenderstatus()){
 
     let callgroup = controllSenderstatus();
-    if(controllSenderstatus()==""){
+    if(controllSenderstatus()=="Alle"){
         //alle gruppene
         callgroup = filterGroupPreMessage(data)
     }else{
