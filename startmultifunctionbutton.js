@@ -212,7 +212,14 @@ listGroupMessage(group);
 function listGroupMessage(data) {
     // Filter og list meldinger
     data = filterGroupPreMessage(data);
-    data.push({name:"Alle",airtable:"Alle"});
+    data.push({ name: "Alle", airtable: "Alle" });
+
+    // Sorter data etter group.name
+    data.sort((a, b) => {
+        if (a.name.toLowerCase() === 'a') return -1; // Sett "a" øverst
+        if (b.name.toLowerCase() === 'a') return 1;  // Sett "a" øverst
+        return a.name.localeCompare(b.name); // Sorter alfabetisk for andre navn
+    });
 
     const list = document.getElementById("groupmessagelist");
     list.innerHTML = ""; // Fjern eksisterende elementer
@@ -231,7 +238,7 @@ function listGroupMessage(data) {
         // Legg til klikk-hendelse
         rowElement.addEventListener("click", function () {
             markGroupButton(rowElement);
-            //markere sendeknapp
+            // Markere sendeknapp
             controllSenderstatus();
         });
 
@@ -239,6 +246,7 @@ function listGroupMessage(data) {
         list.appendChild(rowElement);
     }
 }
+
 
 function filterGroupPreMessage(data) {
 
