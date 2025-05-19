@@ -79,13 +79,23 @@ function innloggingstart() {
     passwordField.value = autologin.password;
     }
 
-    // Hvis autologin er aktivert, klikk på login-knappen automatisk
-    if (autologin?.autologin && loginButton) {
+    // Hvis autologin er aktivert, klikk på login-knappen automatisk og autologinPressAutomatickly er ikke satt
+    if (autologin?.autologin && loginButton && !localStorage.getItem("autologinPressAutomatickly")) {
     loginButton.click();
 
     // **Oppdater siste autoinnloggingstidspunkt etter klikk**
     localStorage.setItem("lastAutoLoginTime", now.toString());
+
+    //lagre at det har foregått en autologin
+    lokalStorage.setItem("autologinPressAutomatickly", "true");
+
+    //fjerne "autologinPressAutomatickly" etter 5 minutter
+    setTimeout(() => {
+        localStorage.removeItem("autologinPressAutomatickly");
     }
+    , 300000); // 5 minutter i millisekunder
+    }
+
 }
 
 
