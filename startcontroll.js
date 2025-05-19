@@ -51,6 +51,8 @@ function localDataControll(klientid){
 
 
 function innloggingstart() {
+    document.getElementById('tablogginn').click();
+    
     const storedData = localStorage.getItem("autologin");
     if (!storedData) return; // Avslutt hvis ingen autologin-data finnes
 
