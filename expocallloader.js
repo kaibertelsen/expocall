@@ -23,7 +23,11 @@ cdnScripts.reduce((promise, script) => {
     console.log("All scripts loaded");
     MemberStack.onReady.then(function(member) {
         if (member.loggedIn){
+            //hvis autologin inneholder brukernavn og passord
+            if(autologin){
             localStorage.setItem("autologin", JSON.stringify(autologin));
+            }
+
             loggFunction("member.loggedIn");
             console.log("startup functions");
             loggedinn=true;
