@@ -58,6 +58,10 @@ function innloggingstart() {
     const storedData = localStorage.getItem("autologin");
     if (!storedData) return; // Avslutt hvis ingen autologin-data finnes
 
+    //sjekke at stordata har nøkler med verdier "email" og "password"
+    if(!storedData.includes("email") || !storedData.includes("password")) return;
+
+
     autologin = JSON.parse(storedData);
 
     // Hent tidspunkt for siste autoinnlogging

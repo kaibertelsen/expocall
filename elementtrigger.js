@@ -56,8 +56,19 @@ function scrollUp(){
     
     document.getElementById('logginbutton').onclick = function() {
     //lagrer info lokalt
-    updateinnloggingstart()
-    //sette logg i updatelogg
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    //gåp videre hvis det er gyldige data
+        if (email && password) {
+            //hvis det er gyldige data
+            updateinnloggingstart()
+    }else{
+        //vis feilmelding
+        return;
+    }
+    
+ 
     }
     
     
