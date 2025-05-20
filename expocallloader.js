@@ -21,6 +21,41 @@ cdnScripts.reduce((promise, script) => {
     return promise.then(() => loadScript(script));
 }, Promise.resolve()).then(() => {
     console.log("All scripts loaded");
+    MemberStack.onReady.then(function(member) {
+        if (member.loggedIn){
+            loggFunction("member.loggedIn");
+            console.log("startup functions");
+            loggedinn=true;
+            loggconsole("logginn");
+            saveUserNameIOS(member.name);
+            tokenkontroll();
+            userid = member.airtable;
+            klientid = member.klientid;
+            memberobject = member;
+            panelObjectControll(member);
+            IOSlayout()
+            //skjul coverbilde
+            stoploadingscreen();
+                document.getElementById('sectionfooter').style.display = "block";
+            document.getElementById('headerwrapper').style.display = "block";
+            writeToIndexDb(member);
+            writelogginupdate();
+            modulControll();
+        }else{
+            localStorage.setItem("firsttimeloggin", "true"); 
+            //window.location.replace("https://expocall.app/loggin");
+            if(!localStorage.getItem("panelObject")){
+            document.getElementById('welcomscreen').style.display = "flex";
+            document.getElementById('headerwrapper').style.display = "none";
+            }
+            document.getElementById('sectionfooter').style.display = "none";
+            setTimeout(function() {
+            stoploadingscreen();
+            innloggingstart();
+            }, 1000);
+        }
+
+    });
 }).catch(error => {
     console.error(error);
 });
