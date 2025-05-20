@@ -47,15 +47,10 @@ cdnScripts.reduce((promise, script) => {
             writelogginupdate();
             modulControll();
         }else{
-          // Førstegangsbesøk (brukes evt. til onboarding/logikk)
-
+          
             document.getElementById('sectionfooter').style.display = "none";
-
-            // Vis innloggingsskjerm etter liten forsinkelse
-            setTimeout(function() {
                 stoploadingscreen();
                 innloggingstart(); // starter innlogging
-            }, 1000);
         }
 
     });
