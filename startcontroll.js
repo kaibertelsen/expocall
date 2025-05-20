@@ -1,3 +1,5 @@
+var autologin = null;
+
 function panelObjectControll(member){
     if(localStorage.getItem("panelObject")){
     //Det er et lagret
@@ -56,7 +58,7 @@ function innloggingstart() {
     const storedData = localStorage.getItem("autologin");
     if (!storedData) return; // Avslutt hvis ingen autologin-data finnes
 
-    const autologin = JSON.parse(storedData);
+    autologin = JSON.parse(storedData);
 
     // Hent tidspunkt for siste autoinnlogging
     const lastLoginTime = localStorage.getItem("lastAutoLoginTime");
