@@ -192,8 +192,26 @@ function returdatacontroll(data,id){
 
 function updateinnloggingstart(){
 
-   var autologinswitsjh = document.getElementById("remembermy").checked;
-   var autologin = {email:document.getElementById("email").value,password:document.getElementById("password").value,autologin:autologinswitsjh}
+    //hvis det er gyldige data
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    var remember = document.getElementById("remembermy").checked;
+    //hvis det er gyldige data
+    if (email && password) {
+        //sjekke at det er en gyldig mailadresse
+        var mailformat = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$/;
+        if(email.match(mailformat)){
+            //det er en gyldig mailadresse
+            //hvis det er gyldige data
+            loggFunction("Trykket på logg inn");
+            document.getElementById('logginbutton').click();
+        }else{
+            //det er ikke en gyldig mailadresse
+            return;
+        }
+
+   var autologinswitsjh = remember.checked;
+   var autologin = {email:email.value,password:password.value,autologin:autologinswitsjh}
 
   //skriv autologin til sessionstore
     sessionStorage.setItem("autologin", JSON.stringify(autologin));
