@@ -1,4 +1,4 @@
-var autologin = null;
+
 
 function panelObjectControll(member){
     if(localStorage.getItem("panelObject")){
@@ -189,7 +189,10 @@ function returdatacontroll(data,id){
 function updateinnloggingstart(){
 
    var autologinswitsjh = document.getElementById("remembermy").checked;
-   autologin = {email:document.getElementById("email").value,password:document.getElementById("password").value,autologin:autologinswitsjh}
+   var autologin = {email:document.getElementById("email").value,password:document.getElementById("password").value,autologin:autologinswitsjh}
+
+  //skriv autologin til sessionstore
+    sessionStorage.setItem("autologin", JSON.stringify(autologin));
 }
 
 

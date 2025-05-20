@@ -25,6 +25,7 @@ cdnScripts.reduce((promise, script) => {
     MemberStack.onReady.then(function(member) {
         if (member.loggedIn){
             //hvis autologin inneholder brukernavn og passord
+            const autologin = JSON.parse(sessionStorage.getItem("autologin"));
             if(autologin){
             localStorage.setItem("autologin", JSON.stringify(autologin));
             }
