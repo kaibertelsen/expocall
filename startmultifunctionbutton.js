@@ -374,3 +374,11 @@ function showCustomConfirm(message, onConfirm, onCancel) {
     // Vis dialogen
     confirmDialog.style.display = "flex";
 }
+
+function stoploadingscreen(){
+    document.getElementById("loadingcover").style.display = "none";
+}
+    
+function startloadingscreen(){
+    document.getElementById("loadingcover").style.display = "flex";
+}

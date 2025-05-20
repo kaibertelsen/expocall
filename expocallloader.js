@@ -42,16 +42,21 @@ cdnScripts.reduce((promise, script) => {
             writelogginupdate();
             modulControll();
         }else{
-            localStorage.setItem("firsttimeloggin", "true"); 
-            //window.location.replace("https://expocall.app/loggin");
-            if(!localStorage.getItem("panelObject")){
-            document.getElementById('welcomscreen').style.display = "flex";
-            document.getElementById('headerwrapper').style.display = "none";
+          // Førstegangsbesøk (brukes evt. til onboarding/logikk)
+            localStorage.setItem("firsttimeloggin", "true");
+
+            // Hvis bruker aldri har fått satt et panelObject, vis velkomstskjerm
+            if (!localStorage.getItem("panelObject")) {
+                document.getElementById('welcomscreen').style.display = "flex";
+                document.getElementById('headerwrapper').style.display = "none";
             }
+
             document.getElementById('sectionfooter').style.display = "none";
+
+            // Vis innloggingsskjerm etter liten forsinkelse
             setTimeout(function() {
-            stoploadingscreen();
-            innloggingstart();
+                stoploadingscreen();
+                innloggingstart(); // starter innlogging
             }, 1000);
         }
 

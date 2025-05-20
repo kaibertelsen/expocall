@@ -75,7 +75,16 @@ function innloggingstart() {
 
     // Sjekk om elementene finnes før vi prøver å bruke dem
     if (autologin?.email && emailField) {
-    emailField.value = autologin.email;
+        //sjekke om det er en gyldig mailadresse
+        var mail = autologin.email;
+        var mailformat = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$/;
+        if(mail.match(mailformat)){
+        //det er en gyldig mailadresse
+        emailField.value = autologin.email;
+        }else{
+        //det er ikke en gyldig mailadresse}
+        return;
+        }
     }
     if (autologin?.password && passwordField) {
     passwordField.value = autologin.password;
