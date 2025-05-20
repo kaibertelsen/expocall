@@ -12,6 +12,7 @@ function loadScript(url) {
 const cdnScripts = [
     "https://kaibertelsen.github.io/expocall/startmultifunctionbutton.js",
     "https://kaibertelsen.github.io/expocall/apicom.js",
+    "https://kaibertelsen.github.io/expocall/elementtrigger.js",
     "https://kaibertelsen.github.io/expocall/startcontroll.js"
 
 ];

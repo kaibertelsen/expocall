@@ -189,7 +189,7 @@ function returdatacontroll(data,id){
 function updateinnloggingstart(){
 
    var autologinswitsjh = document.getElementById("remembermy").checked;
-   var autologin = {email:document.getElementById("email").value,password:document.getElementById("password").value,autologin:autologinswitsjh}
+   autologin = {email:document.getElementById("email").value,password:document.getElementById("password").value,autologin:autologinswitsjh}
 }
 
 
