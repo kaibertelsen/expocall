@@ -92,7 +92,7 @@ function innloggingstart() {
 
     // Hvis autologin er aktivert, klikk på login-knappen automatisk og autologinPressAutomatickly er ikke satt
     if (autologin?.autologin && loginButton && !localStorage.getItem("autologinPressAutomatickly")) {
-    loginButton.click();
+    //loginButton.click();
 
     // **Oppdater siste autoinnloggingstidspunkt etter klikk**
     localStorage.setItem("lastAutoLoginTime", now.toString());
