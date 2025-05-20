@@ -69,7 +69,4 @@ if(!localStorage.getItem("firsttimeloggin")){
     localStorage.setItem("firsttimeloggin", "false");
 }
 
-document.getElementById("email-form").addEventListener("submit", function(e) {
-    e.preventDefault(); // hindrer reload
-    // kall evt. din egen login-funksjon her
-});
+
