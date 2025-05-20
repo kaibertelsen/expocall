@@ -209,7 +209,7 @@ function updateinnloggingstart(){
             //det er ikke en gyldig mailadresse
             return;
         }
-
+    }
    var autologinswitsjh = remember.checked;
    var autologin = {email:email.value,password:password.value,autologin:autologinswitsjh}
 
