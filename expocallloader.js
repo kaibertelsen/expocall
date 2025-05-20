@@ -48,13 +48,6 @@ cdnScripts.reduce((promise, script) => {
             modulControll();
         }else{
           // Førstegangsbesøk (brukes evt. til onboarding/logikk)
-            localStorage.setItem("firsttimeloggin", "true");
-
-            // Hvis bruker aldri har fått satt et panelObject, vis velkomstskjerm
-            if (!localStorage.getItem("panelObject")) {
-                document.getElementById('welcomscreen').style.display = "flex";
-                document.getElementById('headerwrapper').style.display = "none";
-            }
 
             document.getElementById('sectionfooter').style.display = "none";
 
@@ -70,3 +63,11 @@ cdnScripts.reduce((promise, script) => {
     console.error(error);
 });
 
+
+//sjekke om det er første gang bruker logger inn
+if(!localStorage.getItem("firsttimeloggin")){
+    
+    document.getElementById('welcomscreen').style.display = "flex";
+    document.getElementById('headerwrapper').style.display = "none";
+    localStorage.setItem("firsttimeloggin", "false");
+}
