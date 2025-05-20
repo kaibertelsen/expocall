@@ -188,10 +188,6 @@ function updateinnloggingstart(){
 
    var autologinswitsjh = document.getElementById("remembermy").checked;
    var autologin = {email:document.getElementById("email").value,password:document.getElementById("password").value,autologin:autologinswitsjh}
-
-localStorage.setItem("autologin", JSON.stringify(autologin));
-
-
 }
 
 
