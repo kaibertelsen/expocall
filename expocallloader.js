@@ -24,6 +24,9 @@ cdnScripts.reduce((promise, script) => {
     console.log("All scripts loaded");
     MemberStack.onReady.then(function(member) {
         if (member.loggedIn){
+            
+            document.getElementById('tabpanel').click();
+
             //hvis autologin inneholder brukernavn og passord
             const autologin = JSON.parse(sessionStorage.getItem("autologin"));
             if(autologin){
