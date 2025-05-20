@@ -76,7 +76,7 @@ function innloggingstart() {
 
     // Hent elementer for å unngå gjentatte kall til `document.getElementById`
     const emailField = document.getElementById("email");
-    const passwordField = document.getElementById("password");
+    const passwordField = document.getElementById("passwordloginn");
     const loginButton = document.getElementById("logginbutton");
 
     // Sjekk om elementene finnes før vi prøver å bruke dem
@@ -194,7 +194,7 @@ function updateinnloggingstart(){
 
     //hvis det er gyldige data
     var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
+    var password = document.getElementById("passwordloginn").value;
     var remember = document.getElementById("remembermy").checked;
     //hvis det er gyldige data
     if (email && password) {
