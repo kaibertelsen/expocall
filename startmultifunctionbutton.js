@@ -382,3 +382,20 @@ function stoploadingscreen(){
 function startloadingscreen(){
     document.getElementById("loadingcover").style.display = "flex";
 }
+
+
+function reinitWebflowInteractions() {
+    if (typeof Webflow !== 'undefined' && Webflow.require) {
+      try {
+        Webflow.destroy();                      // Fjerner eksisterende bindings
+        Webflow.ready();                        // Setter opp på nytt
+        Webflow.require('ix2').init();          // Initierer Interactions 2.0
+        console.log("✅ Webflow interactions reinitialisert.");
+      } catch (e) {
+        console.warn("⚠️ Klarte ikke å reinitiere Webflow interactions:", e);
+      }
+    } else {
+      console.warn("⚠️ Webflow er ikke klar eller tilgjengelig enda.");
+    }
+  }
+  

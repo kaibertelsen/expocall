@@ -48,6 +48,8 @@ function localDataControll(klientid){
     getklientobjectfromserver(klientid);
     }
 
+    reinitWebflowInteractions();
+
 }
 
 
