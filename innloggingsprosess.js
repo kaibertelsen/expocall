@@ -476,11 +476,9 @@ function logginswitsjchange(elementid){
 }
     
 function manuellogout(){
-    if(localStorage.getItem("autologin")){
-      var logginnfo = JSON.parse(localStorage.getItem("autologin"));
-      logginnfo.autologin = false
-      localStorage.setItem ("autologin",JSON.stringify(logginnfo));
-    }
+    
+    // fjern "automaticOutlogDate" fra localStorage
+    localStorage.removeItem("automaticOutlogDate");
     
     MemberStack.logout();
 }
