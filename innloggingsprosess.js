@@ -4,39 +4,37 @@ var gEmail;
 setInterval(checkScheduledLogout, 60 * 60 * 1000); // Hver time
 
 
-//Oppdaterer innloggingsprosess annenver dag kl 02:00
 function checkScheduledLogout() {
     const now = new Date();
     const currentHour = now.getHours();
-    const todayDate = now.toISOString().split("T")[0]; // f.eks. "2025-05-26"
+    const todayDate = now.toISOString().split("T")[0];
 
     const lastLogoutTimestamp = localStorage.getItem("automaticOutlogDate");
 
-    // Bare fortsett hvis klokka er rundt 02:00 (mellom 02:00 og 02:59)
-    if (currentHour !== 2) {
+    // Bare fortsett hvis klokka er 02:00
+    if (currentHour !== 2) return;
+
+    // Hvis det er første gang (ingen tidligere logout registrert) → logg ut og sett startpunkt
+    if (!lastLogoutTimestamp) {
+        loggFunction("checkScheduledLogout: første gang – logger ut og setter startpunkt");
+        automaticLogout();
         return;
     }
 
-    if (lastLogoutTimestamp) {
-        const lastLogoutDate = new Date(lastLogoutTimestamp);
-        const lastLogoutDateOnly = lastLogoutTimestamp.split("T")[0];
+    const lastLogoutDate = new Date(lastLogoutTimestamp);
+    const lastLogoutDateOnly = lastLogoutTimestamp.split("T")[0];
 
-        // Sjekk om vi allerede har logget ut i dag
-        if (lastLogoutDateOnly === todayDate) {
-            return;
-        }
+    // Unngå å logge ut flere ganger samme dag
+    if (lastLogoutDateOnly === todayDate) return;
 
-        // Sjekk om det er gått minst 2 dager siden forrige utlogging
-        const diffInDays = Math.floor((now - lastLogoutDate) / (1000 * 60 * 60 * 24));
-        if (diffInDays < 2) {
-            return;
-        }
-    }
+    // Krev at det har gått minst 2 dager
+    const diffInDays = Math.floor((now - lastLogoutDate) / (1000 * 60 * 60 * 24));
+    if (diffInDays < 2) return;
 
-    // Logg ut og lagre tidspunkt (skjer i automaticLogout)
     loggFunction("checkScheduledLogout: annenhver dag kl 02 – logger ut");
     automaticLogout();
 }
+
 
 
 function automaticLogout() {
@@ -195,14 +193,20 @@ function updateinterval() {
 
 //midlertidig
 }
+
+// uppdater panel 
+//48timer 
+var updateinterval = 86400000; // 24 timer i millisekunder
 if(localStorage.getItem("klient")){
 var klient = JSON.parse(localStorage.getItem("klient"));
     if(klient?.updateinterval){
     updateinterval = Number(klient.updateinterval)*60000;
+    }else{
+        //hvert tiende minutt
+    updateinterval = 600000; // 10 minutter i millisekunder
     }
 }
-//48timer 
-var updateinterval = 86400000; // 24 timer i millisekunder
+
 let updateOntime = setInterval(myupdatePanel,updateinterval);
 function myupdatePanel() {
   updatemodul();

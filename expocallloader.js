@@ -37,6 +37,9 @@ MemberStack.onReady.then(function(member) {
             onLoginSuccess(email, password);
         }
 
+        //setter automaticOutlogDate
+        
+
         
         startNormalProcess(member);
     } else {
