@@ -170,7 +170,11 @@ let myVar = setInterval(myTimer, 86400000);
 function myTimer() {
     loggFunction("myTimer: automatisk utlogging og lagrer tidspunkt");
 }
+function updateinterval() {
+    // Oppdaterer brukerens innstillinger for oppdateringsintervall
 
+//midlertidig
+}
 if(localStorage.getItem("klient")){
 var klient = JSON.parse(localStorage.getItem("klient"));
     if(klient?.updateinterval){
