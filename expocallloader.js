@@ -37,7 +37,8 @@ MemberStack.onReady.then(function(member) {
             onLoginSuccess(email, password);
         }
 
-        startNormalProcess();
+        
+        startNormalProcess(member);
     } else {
         handleAutoLoginFlow();
     }

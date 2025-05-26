@@ -117,7 +117,7 @@ function showLoginWindow() {
 }
 
 // Starter app/prosess etter innlogging
-function startNormalProcess() {
+function startNormalProcess(member) {
     console.log("Innlogging bekreftet – starter hovedprosess.");
     document.getElementById('tabpanel').click();
 
