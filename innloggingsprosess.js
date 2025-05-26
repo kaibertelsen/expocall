@@ -48,7 +48,7 @@ function storeOutlogKey() {
 
 // Behandler innlasting og auto-login-flyt med 24t sjekk
 function handleAutoLoginFlow() {
-    const storedTimestamp = localStorage.getItem("automaticOutlog");
+    const storedTimestamp = localStorage.getItem("automaticOutlogDate");
 
     if (storedTimestamp) {
         const lastLogoutTime = new Date(storedTimestamp);
