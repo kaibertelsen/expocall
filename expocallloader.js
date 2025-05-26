@@ -29,8 +29,8 @@ cdnScripts.reduce((promise, script) => {
 MemberStack.onReady.then(function(member) {
     checkScheduledLogout();
     if (member.loggedIn) {
-        const email = document.getElementById("email")?.value || localStorage.getItem("savedUser");
-        const password = document.getElementById("passwordloginn")?.value || localStorage.getItem("savedPass");
+        const email = gEmail || member.email || null;
+        const password = gPassword || null
 
         // Bare hvis begge finnes – unngår å lagre tomme verdier
         if (email && password) {

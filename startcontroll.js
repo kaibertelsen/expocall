@@ -202,7 +202,7 @@ function updateinnloggingstart(){
             //det er en gyldig mailadresse
             //hvis det er gyldige data
             loggFunction("Trykket på logg inn");
-            document.getElementById('logginbutton').click();
+            
         }else{
             //det er ikke en gyldig mailadresse
             return;

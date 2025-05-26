@@ -1,4 +1,5 @@
-
+var gPassword;
+var gEmail;
 //Oppdaterer innloggingsprosess annenver dag kl 02:00
 function checkScheduledLogout() {
     const now = new Date();
