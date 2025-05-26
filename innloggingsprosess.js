@@ -177,7 +177,8 @@ var klient = JSON.parse(localStorage.getItem("klient"));
     updateinterval = Number(klient.updateinterval)*60000;
     }
 }
-
+//48timer 
+var updateinterval = 86400000; // 24 timer i millisekunder
 let updateOntime = setInterval(myupdatePanel,updateinterval);
 function myupdatePanel() {
   updatemodul();
