@@ -63,7 +63,6 @@ function scrollUp(){
         localStorage.setItem("savedUser", email);
         localStorage.setItem("savedPass", password);
     
-      
     };
     
     
