@@ -25,7 +25,7 @@ cdnScripts.reduce((promise, script) => {
     console.log("All scripts loaded");
 
     //sett versjonsnummeret
-    const version = "1.0.93";
+    const version = "1.093";
     const versiontext = document.getElementById("versiontext");
 
     if (versiontext) {
