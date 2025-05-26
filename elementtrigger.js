@@ -101,6 +101,14 @@ function scrollUp(){
     //slette elle databaser
     manuellogout();
     }
+
+    const loggoutsettingsauto = document.getElementById('loggoutsettingsauto');
+    if (loggoutsettingsauto) {
+        loggoutsettingsauto.onclick = function() {
+            //for å simulere automatisk utlogging
+            automaticLogout();
+        }
+    }
     
     
     document.getElementById('testfunctionbutton').onclick = function() {
