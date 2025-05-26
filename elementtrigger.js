@@ -54,16 +54,7 @@ function scrollUp(){
     }
     */
     
-    document.getElementById('logginbutton').onclick = function() {
-        // Hent verdier
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("passwordloginn").value;
-    
-        // Lagre i localStorage
-        localStorage.setItem("savedUser", email);
-        localStorage.setItem("savedPass", password);
-    
-    };
+
     
     
     

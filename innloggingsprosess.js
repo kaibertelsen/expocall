@@ -64,7 +64,6 @@ function handleAutoLoginFlow() {
     // Hvis over 24t eller ingen nøkkel
     showLoginWindow();
     clearInputs();
-    localStorage.removeItem("automaticOutlog");
 }
 
 
@@ -87,11 +86,22 @@ function tryAutoLogin() {
     }
 }
 
+document.getElementById('logginbutton').onclick = function() {
+    // Hent verdier
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("passwordloginn").value;
+
+    // Lagre i localStorage
+    localStorage.setItem("tempUserEmail", email);
+    localStorage.setItem("tempUserPass", password);
+
+};
+
+
 // Kalles ved vellykket innlogging
 function onLoginSuccess(email, password) {
     localStorage.setItem("savedUser", email);
     localStorage.setItem("savedPass", password);
-    localStorage.removeItem("automaticOutlog");
 }
 
 // Kalles ved mislykket innlogging
