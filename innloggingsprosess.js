@@ -476,10 +476,8 @@ function logginswitsjchange(elementid){
 }
     
 function manuellogout(){
-    
     // fjern "automaticOutlogDate" fra localStorage
     localStorage.removeItem("automaticOutlogDate");
-    
     MemberStack.logout();
 }
     
