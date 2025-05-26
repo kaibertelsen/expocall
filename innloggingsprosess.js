@@ -1,37 +1,43 @@
 var gPassword;
 var gEmail;
+
+setInterval(checkScheduledLogout, 60 * 60 * 1000); // Hver time
+
+
 //Oppdaterer innloggingsprosess annenver dag kl 02:00
 function checkScheduledLogout() {
     const now = new Date();
     const currentHour = now.getHours();
     const todayDate = now.toISOString().split("T")[0]; // f.eks. "2025-05-26"
 
-    const lastLogoutDate = localStorage.getItem("automaticOutlogDate");
+    const lastLogoutTimestamp = localStorage.getItem("automaticOutlogDate");
 
     // Bare fortsett hvis klokka er rundt 02:00 (mellom 02:00 og 02:59)
     if (currentHour !== 2) {
         return;
     }
 
-    // Sjekk at vi ikke allerede har logget ut i dag
-    if (lastLogoutDate === todayDate) {
-        return;
-    }
+    if (lastLogoutTimestamp) {
+        const lastLogoutDate = new Date(lastLogoutTimestamp);
+        const lastLogoutDateOnly = lastLogoutTimestamp.split("T")[0];
 
-    // Sjekk om det er annenhver dag (ved å telle dager siden sist)
-    if (lastLogoutDate) {
-        const last = new Date(lastLogoutDate);
-        const diffInDays = Math.floor((now - last) / (1000 * 60 * 60 * 24));
+        // Sjekk om vi allerede har logget ut i dag
+        if (lastLogoutDateOnly === todayDate) {
+            return;
+        }
+
+        // Sjekk om det er gått minst 2 dager siden forrige utlogging
+        const diffInDays = Math.floor((now - lastLogoutDate) / (1000 * 60 * 60 * 24));
         if (diffInDays < 2) {
             return;
         }
     }
 
-    // Lagre dagens dato og logg ut
-    localStorage.setItem("automaticOutlogDate", todayDate);
+    // Logg ut og lagre tidspunkt (skjer i automaticLogout)
     loggFunction("checkScheduledLogout: annenhver dag kl 02 – logger ut");
     automaticLogout();
 }
+
 
 function automaticLogout() {
     // 1. Lagre tidspunkt for auto-utlogging
@@ -112,6 +118,7 @@ function onLoginFailure() {
     clearInputs();
     showLoginWindow();
 }
+
 
 // Tømmer inputfeltene
 function clearInputs() {

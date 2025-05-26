@@ -27,7 +27,7 @@ cdnScripts.reduce((promise, script) => {
 
     // Kjør når Memberstack er klar
 MemberStack.onReady.then(function(member) {
-    checkScheduledLogout();
+    
     if (member.loggedIn) {
         const email = localStorage.getItem("tempUserEmail") || member.email || null;
         const password = gPassword || localStorage.getItem("tempUserPass") || null;
