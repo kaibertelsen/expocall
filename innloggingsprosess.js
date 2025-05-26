@@ -35,7 +35,7 @@ function checkScheduledLogout() {
 
 function automaticLogout() {
     // 1. Lagre tidspunkt for auto-utlogging
-    localStorage.setItem("automaticOutlog", new Date().toISOString());
+    localStorage.setItem("automaticOutlogDate", new Date().toISOString());
 
     // 2. Utfør utlogging via Memberstack
     MemberStack.logout();

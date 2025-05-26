@@ -55,11 +55,17 @@ function scrollUp(){
     */
     
     document.getElementById('logginbutton').onclick = function() {
-    //lagrer info lokalt
-    gEmail = document.getElementById("email").value;
-    gPassword = document.getElementById("passwordloginn").value;
-
-    }
+        // Hent verdier
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("passwordloginn").value;
+    
+        // Lagre i localStorage
+        localStorage.setItem("savedUser", email);
+        localStorage.setItem("savedPass", password);
+    
+      
+    };
+    
     
     
     
