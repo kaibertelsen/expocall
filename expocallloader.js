@@ -24,6 +24,14 @@ cdnScripts.reduce((promise, script) => {
 }, Promise.resolve()).then(() => {
     console.log("All scripts loaded");
 
+    //sett versjonsnummeret
+    const version = "1.0.93";
+    const versiontext = document.getElementById("versiontext");
+
+    if (versiontext) {
+        versiontext.textContent = `Versjon: ${version}`;
+    }
+
 
     // Kjør når Memberstack er klar
 MemberStack.onReady.then(function(member) {
