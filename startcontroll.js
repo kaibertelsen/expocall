@@ -15,7 +15,6 @@ function panelObjectControll(member){
 
 }
 
-
 function localDataControll(klientid){
     console.log("localDatabaseKontroll");
     if(!localStorage.getItem("user")){
@@ -51,8 +50,6 @@ function localDataControll(klientid){
     reinitWebflowInteractions();
 
 }
-
-
 
 function innloggingstart() {
     document.getElementById('tablogginn').click();
@@ -116,7 +113,6 @@ function innloggingstart() {
     }
 
 }
-
 
 function manuelupdate(){
     console.log("manuel update")
@@ -218,7 +214,6 @@ function updateinnloggingstart(){
   //skriv autologin til sessionstore
     sessionStorage.setItem("autologin", JSON.stringify(autologin));
 }
-
 
 function updateloggtext(element){
 const d = new Date();

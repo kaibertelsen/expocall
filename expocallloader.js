@@ -13,7 +13,8 @@ const cdnScripts = [
     "https://kaibertelsen.github.io/expocall/startmultifunctionbutton.js",
     "https://kaibertelsen.github.io/expocall/apicom.js",
     "https://kaibertelsen.github.io/expocall/elementtrigger.js",
-    "https://kaibertelsen.github.io/expocall/startcontroll.js"
+    "https://kaibertelsen.github.io/expocall/startcontroll.js",
+    "https://kaibertelsen.github.io/expocall/innloggingsprosess.js"
 
 ];
 
@@ -22,43 +23,27 @@ cdnScripts.reduce((promise, script) => {
     return promise.then(() => loadScript(script));
 }, Promise.resolve()).then(() => {
     console.log("All scripts loaded");
-    MemberStack.onReady.then(function(member) {
-        if (member.loggedIn){
-            
-            document.getElementById('tabpanel').click();
 
-            //hvis autologin inneholder brukernavn og passord
-            const autologin = JSON.parse(sessionStorage.getItem("autologin"));
-            if(autologin){
-            localStorage.setItem("autologin", JSON.stringify(autologin));
-            }
 
-            loggFunction("member.loggedIn");
-            console.log("startup functions");
-            loggedinn=true;
-            loggconsole("logginn");
-            saveUserNameIOS(member.name);
-            tokenkontroll();
-            userid = member.airtable;
-            klientid = member.klientid;
-            memberobject = member;
-            panelObjectControll(member);
-            IOSlayout()
-            //skjul coverbilde
-            stoploadingscreen();
-                document.getElementById('sectionfooter').style.display = "block";
-            document.getElementById('headerwrapper').style.display = "block";
-            writeToIndexDb(member);
-            writelogginupdate();
-            modulControll();
-        }else{
-          
-            document.getElementById('sectionfooter').style.display = "none";
-                stoploadingscreen();
-                innloggingstart(); // starter innlogging
+    // Kjør når Memberstack er klar
+MemberStack.onReady.then(function(member) {
+    checkScheduledLogout();
+    if (member.loggedIn) {
+        const email = document.getElementById("email")?.value || localStorage.getItem("savedUser");
+        const password = document.getElementById("passwordloginn")?.value || localStorage.getItem("savedPass");
+
+        // Bare hvis begge finnes – unngår å lagre tomme verdier
+        if (email && password) {
+            onLoginSuccess(email, password);
         }
 
-    });
+        startNormalProcess();
+    } else {
+        handleAutoLoginFlow();
+    }
+});
+
+
 }).catch(error => {
     console.error(error);
 });
