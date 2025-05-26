@@ -111,7 +111,9 @@ function clearInputs() {
 // Viser evt. innloggingsvindu
 function showLoginWindow() {
     console.log("Bruker ikke logget inn – viser innloggingsvindu.");
-    document.getElementById('tablogginn').style.display = "flex";
+    document.getElementById('tablogginn').click();
+    document.getElementById('headerwrapper').style.display = "none";
+    document.getElementById('sectionfooter').style.display = "none";
 }
 
 // Starter app/prosess etter innlogging
