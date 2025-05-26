@@ -164,6 +164,12 @@ function startNormalProcess() {
     //modulControll();
 }
 
+// Logger ut automatisk én gang i døgnet (24 timer = 86400000 ms)
+let myVar = setInterval(myTimer, 86400000);
+
+function myTimer() {
+    loggFunction("myTimer: automatisk utlogging og lagrer tidspunkt");
+}
 
 if(localStorage.getItem("klient")){
 var klient = JSON.parse(localStorage.getItem("klient"));
