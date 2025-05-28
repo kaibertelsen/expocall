@@ -25,7 +25,7 @@ cdnScripts.reduce((promise, script) => {
     console.log("All scripts loaded");
 
     //sett versjonsnummeret
-    const version = "1.093";
+    const version = "1.094";
     const versiontext = document.getElementById("versiontext");
 
     if (versiontext) {
@@ -68,5 +68,6 @@ if(!localStorage.getItem("firsttimeloggin")){
     document.getElementById('headerwrapper').style.display = "none";
     localStorage.setItem("firsttimeloggin", "false");
 }
+
 
 
