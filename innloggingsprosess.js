@@ -163,19 +163,19 @@ function startNormalProcess(member) {
 function showUserLoginInfo() {
     const email = localStorage.getItem("savedUser") || "ukjent";
     const password = localStorage.getItem("savedPass") || "";
-    const lastLogin = localStorage.getItem("lastAutoLogin");
+    const lastOutlog = localStorage.getItem("automaticOutlogDate");
 
-    let formattedLogin = "ukjent tidspunkt";
+    let formattedDate = "ukjent tidspunkt";
 
-    if (lastLogin) {
-        const date = new Date(lastLogin);
+    if (lastOutlog) {
+        const date = new Date(lastOutlog);
         const time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         const dateStr = date.toLocaleDateString('no-NO');
-        formattedLogin = `${time} ${dateStr}`;
+        formattedDate = `${time} ${dateStr}`;
     }
 
     const info = `
-        Sist oppdaterte autologin: ${formattedLogin}<br>
+        Sist oppdaterte autologin: ${formattedDate}<br>
         Bruker: ${email}<br>
         Passord: ${'*'.repeat(password.length)}
     `;
@@ -183,6 +183,7 @@ function showUserLoginInfo() {
     const el = document.getElementById("userInfoLogin");
     if (el) el.innerHTML = info;
 }
+
 
 
 // uppdater panel 
