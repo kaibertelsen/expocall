@@ -3,7 +3,6 @@ var gEmail;
 
 setInterval(checkScheduledLogout, 60 * 60 * 1000); // Hver time
 
-
 function checkScheduledLogout() {
     const now = new Date();
     const currentHour = now.getHours();
@@ -31,43 +30,19 @@ function checkScheduledLogout() {
     const diffInDays = Math.floor((now - lastLogoutDate) / (1000 * 60 * 60 * 24));
     if (diffInDays < 2) return;
 
-    loggFunction("checkScheduledLogout: annenhver dag kl 02 – logger ut");
     automaticLogout();
 }
 
-
-
 function automaticLogout() {
-    // 1. Lagre tidspunkt for auto-utlogging
+    localStorage.setItem("doAutoLogin", "true");
     localStorage.setItem("automaticOutlogDate", new Date().toISOString());
 
-    // 2. Utfør utlogging via Memberstack
     MemberStack.logout();
-}
 
-// Lagrer tidspunkt for automatisk utlogging
-function storeOutlogKey() {
-    localStorage.setItem("automaticOutlog", new Date().toISOString());
-}
-
-// Behandler innlasting og auto-login-flyt med 24t sjekk
-function handleAutoLoginFlow() {
-    const storedTimestamp = localStorage.getItem("automaticOutlogDate");
-
-    if (storedTimestamp) {
-        const lastLogoutTime = new Date(storedTimestamp);
-        const now = new Date();
-        const hoursSinceLogout = (now - lastLogoutTime) / (1000 * 60 * 60); // til timer
-
-        if (hoursSinceLogout <= 24) {
-            tryAutoLogin();
-            return;
-        }
-    }
-
-    // Hvis over 24t eller ingen nøkkel
-    showLoginWindow();
-    clearInputs();
+    // Reload siden etter litt tid, så vi får en "ren" onReady
+    setTimeout(() => {
+        location.reload();
+    }, 1500);
 }
 
 
@@ -85,10 +60,36 @@ function tryAutoLogin() {
             document.getElementById("logginbutton").click();
         }, 1000);
     } else {
-        showLoginWindow();
-        clearInputs();
+        startManualLogin();
     }
 }
+
+// Lagrer tidspunkt for automatisk utlogging
+function storeOutlogKey() {
+    localStorage.setItem("automaticOutlog", new Date().toISOString());
+}
+
+function startManualLogin() {
+  
+    //starter manuell innlogging    
+    const savedEmail = localStorage.getItem("savedUser");
+    const savedPass = localStorage.getItem("savedPass");
+
+    if (savedEmail) {
+        //legger disse inn i inputfeltene
+        document.getElementById("email").value = savedEmail;
+    }
+
+    if (savedPass) {
+        //legger disse inn i inputfeltene
+        document.getElementById("passwordloginn").value = savedPass;
+    }
+
+    //vis innloggingsvindu
+    showLoginWindow();
+ 
+}
+
 
 document.getElementById('logginbutton').onclick = function() {
     // Hent verdier
@@ -96,37 +97,18 @@ document.getElementById('logginbutton').onclick = function() {
     const password = document.getElementById("passwordloginn").value;
 
     // Lagre i localStorage
-    localStorage.setItem("tempUserEmail", email);
-    localStorage.setItem("tempUserPass", password);
+    saveEmailAndPass(email, password);
 
 };
 
-
 // Kalles ved vellykket innlogging
-function onLoginSuccess(email, password) {
+function saveEmailAndPass(email, password) {
     localStorage.setItem("savedUser", email);
     localStorage.setItem("savedPass", password);
 }
 
-// Kalles ved mislykket innlogging
-function onLoginFailure() {
-    localStorage.removeItem("savedUser");
-    localStorage.removeItem("savedPass");
-    localStorage.removeItem("automaticOutlog");
-    clearInputs();
-    showLoginWindow();
-}
-
-
-// Tømmer inputfeltene
-function clearInputs() {
-    document.getElementById("email").value = "";
-    document.getElementById("passwordloginn").value = "";
-}
-
 // Viser evt. innloggingsvindu
 function showLoginWindow() {
-    console.log("Bruker ikke logget inn – viser innloggingsvindu.");
     document.getElementById('tablogginn').click();
     document.getElementById('headerwrapper').style.display = "none";
     document.getElementById('sectionfooter').style.display = "none";
@@ -134,7 +116,7 @@ function showLoginWindow() {
 
 // Starter app/prosess etter innlogging
 function startNormalProcess(member) {
-    console.log("Innlogging bekreftet – starter hovedprosess.");
+   
     document.getElementById('tabpanel').click();
 
     //hvis autologin inneholder brukernavn og passord
@@ -182,28 +164,17 @@ function startNormalProcess(member) {
     //modulControll();
 }
 
-// Logger ut automatisk én gang i døgnet (24 timer = 86400000 ms)
-let myVar = setInterval(myTimer, 86400000);
-
-function myTimer() {
-    loggFunction("myTimer: automatisk utlogging og lagrer tidspunkt");
-}
-function updateinterval() {
-    // Oppdaterer brukerens innstillinger for oppdateringsintervall
-
-//midlertidig
-}
-
 // uppdater panel 
 //48timer 
 var updateinterval = 86400000; // 24 timer i millisekunder
+
 if(localStorage.getItem("klient")){
-var klient = JSON.parse(localStorage.getItem("klient"));
+    var klient = JSON.parse(localStorage.getItem("klient"));
     if(klient?.updateinterval){
-    updateinterval = Number(klient.updateinterval)*60000;
+        updateinterval = Number(klient.updateinterval)*60000;
     }else{
         //hvert tiende minutt
-    updateinterval = 600000; // 10 minutter i millisekunder
+        updateinterval = 600000; // 10 minutter i millisekunder
     }
 }
 
@@ -488,8 +459,13 @@ function logginswitsjchange(elementid){
     
 function manuellogout(){
     // fjern "automaticOutlogDate" fra localStorage
-    localStorage.removeItem("automaticOutlogDate");
     MemberStack.logout();
+
+    // Reload siden etter litt tid, så vi får en "ren" onReady
+    setTimeout(() => {
+        location.reload();
+    }, 1500);
+
 }
     
     

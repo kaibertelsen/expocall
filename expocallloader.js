@@ -25,7 +25,7 @@ cdnScripts.reduce((promise, script) => {
     console.log("All scripts loaded");
 
     //sett versjonsnummeret
-    const version = "1.094";
+    const version = "1.095";
     const versiontext = document.getElementById("versiontext");
 
     if (versiontext) {
@@ -34,26 +34,26 @@ cdnScripts.reduce((promise, script) => {
 
 
     // Kjør når Memberstack er klar
-MemberStack.onReady.then(function(member) {
+    MemberStack.onReady.then(function(member) {
+        if (member.loggedIn) {
+            localStorage.setItem("loggedIn", "true");
     
-    if (member.loggedIn) {
-        const email = localStorage.getItem("tempUserEmail") || member.email || null;
-        const password = gPassword || localStorage.getItem("tempUserPass") || null;
-
-        // Bare hvis begge finnes – unngår å lagre tomme verdier
-        if (email && password) {
-            onLoginSuccess(email, password);
+            // Rydd opp i auto-login flagg etter faktisk innlogging
+            if (localStorage.getItem("doAutoLogin") === "true") {
+                localStorage.removeItem("doAutoLogin");
+            }
+    
+            startNormalProcess(member);
+        } else {
+            // Ikke fjern flagget her – det trengs etter reload
+            if (localStorage.getItem("doAutoLogin") === "true") {
+                tryAutoLogin();
+            } else {
+                startManualLogin();
+            }
         }
-
-        //setter automaticOutlogDate
-        
-
-        
-        startNormalProcess(member);
-    } else {
-        handleAutoLoginFlow();
-    }
-});
+    });
+    
 
 
 }).catch(error => {
