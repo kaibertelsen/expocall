@@ -39,10 +39,6 @@ function automaticLogout() {
 
     MemberStack.logout();
 
-    // Reload siden etter litt tid, så vi får en "ren" onReady
-    setTimeout(() => {
-        location.reload();
-    }, 1500);
 }
 
 
@@ -460,12 +456,6 @@ function logginswitsjchange(elementid){
 function manuellogout(){
     // fjern "automaticOutlogDate" fra localStorage
     MemberStack.logout();
-
-    // Reload siden etter litt tid, så vi får en "ren" onReady
-    setTimeout(() => {
-        location.reload();
-    }, 1500);
-
 }
     
     
