@@ -160,6 +160,31 @@ function startNormalProcess(member) {
     //modulControll();
 }
 
+function showUserLoginInfo() {
+    const email = localStorage.getItem("savedUser") || "ukjent";
+    const password = localStorage.getItem("savedPass") || "";
+    const lastLogin = localStorage.getItem("lastAutoLogin");
+
+    let formattedLogin = "ukjent tidspunkt";
+
+    if (lastLogin) {
+        const date = new Date(lastLogin);
+        const time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const dateStr = date.toLocaleDateString('no-NO');
+        formattedLogin = `${time} ${dateStr}`;
+    }
+
+    const info = `
+        Sist oppdaterte autologin: ${formattedLogin}<br>
+        Bruker: ${email}<br>
+        Passord: ${'*'.repeat(password.length)}
+    `;
+
+    const el = document.getElementById("userInfoLogin");
+    if (el) el.innerHTML = info;
+}
+
+
 // uppdater panel 
 //48timer 
 var updateinterval = 86400000; // 24 timer i millisekunder

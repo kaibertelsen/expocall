@@ -37,6 +37,8 @@ cdnScripts.reduce((promise, script) => {
     MemberStack.onReady.then(function(member) {
         if (member.loggedIn) {
             localStorage.setItem("loggedIn", "true");
+
+            showUserLoginInfo();
     
             // Rydd opp i auto-login flagg etter faktisk innlogging
             if (localStorage.getItem("doAutoLogin") === "true") {
