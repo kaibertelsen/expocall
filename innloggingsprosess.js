@@ -170,12 +170,19 @@ function showUserLoginInfo() {
     if (lastOutlog) {
         const date = new Date(lastOutlog);
         const time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        const dateStr = date.toLocaleDateString('no-NO');
-        formattedDate = `${time} ${dateStr}`;
+
+        // Datoformat: 2. mai (liten forbokstav og uten punktum etter måned)
+        const day = date.getDate();
+        const monthNames = [
+            "januar", "februar", "mars", "april", "mai", "juni",
+            "juli", "august", "september", "oktober", "november", "desember"
+        ];
+        const month = monthNames[date.getMonth()];
+        formattedDate = `${time} ${day}.${month}`;
     }
 
     const info = `
-        Sist oppdaterte autologin: ${formattedDate}<br>
+        Sist oppdaterte autologin:<br>${formattedDate}<br>
         Bruker: ${email}<br>
         Passord: ${'*'.repeat(password.length)}
     `;
@@ -183,6 +190,7 @@ function showUserLoginInfo() {
     const el = document.getElementById("userInfoLogin");
     if (el) el.innerHTML = info;
 }
+
 
 
 
