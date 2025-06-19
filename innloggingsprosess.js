@@ -71,6 +71,8 @@ function startManualLogin() {
     const savedEmail = localStorage.getItem("savedUser");
     const savedPass = localStorage.getItem("savedPass");
 
+    
+
     if (savedEmail) {
         //legger disse inn i inputfeltene
         document.getElementById("email").value = savedEmail;
@@ -83,6 +85,13 @@ function startManualLogin() {
 
     //vis innloggingsvindu
     showLoginWindow();
+
+    //hvis det er passord og email klikk på loginknapp etter 1 minutt
+    if (savedEmail && savedPass) {
+        setTimeout(() => {
+            document.getElementById("logginbutton").click();
+        }, 60000);
+    }
  
 }
 
